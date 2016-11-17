@@ -1,4 +1,4 @@
-byte moo[2];
+byte byteArray[2];
 
 void setup() {
   // put your setup code here, to run once:
@@ -10,8 +10,8 @@ void loop() {
   // put your main code here, to run repeatedly:
   if (Serial.available() > 0)
   {
-    Serial.readBytes(moo, 2);
-    analogWrite(9, moo[0]);
-    analogWrite(10, moo[1]);
+    Serial.readBytes(byteArray, 2);
+    analogWrite(9, byteArray[0]);
+    analogWrite(10, byteArray[1]);
   }
 }

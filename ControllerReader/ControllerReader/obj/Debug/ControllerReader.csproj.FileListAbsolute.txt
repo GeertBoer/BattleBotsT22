@@ -18,3 +18,6 @@ c:\users\geert\documents\visual studio 2015\Projects\ControllerReader\Controller
 c:\users\geert\documents\visual studio 2015\Projects\ControllerReader\ControllerReader\obj\Debug\ControllerReader.csproj.GenerateResource.Cache
 c:\users\geert\documents\visual studio 2015\Projects\ControllerReader\ControllerReader\obj\Debug\ControllerReader.exe
 c:\users\geert\documents\visual studio 2015\Projects\ControllerReader\ControllerReader\obj\Debug\ControllerReader.pdb
+C:\Users\geert\Source\Repos\BattleBotsT22\ControllerReader\ControllerReader\bin\Debug\ControllerReader.exe.config
+C:\Users\geert\Source\Repos\BattleBotsT22\ControllerReader\ControllerReader\obj\Debug\ControllerReader.exe
+C:\Users\geert\Source\Repos\BattleBotsT22\ControllerReader\ControllerReader\obj\Debug\ControllerReader.pdb
