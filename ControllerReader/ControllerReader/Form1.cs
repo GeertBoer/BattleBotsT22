@@ -85,5 +85,44 @@ namespace ControllerReader
         {
             CleanUp();
         }
+
+        private byte[] converter(float speed, float direction)
+        {
+            Direction direct;
+            byte leftSpeed;
+            byte rightSpeed;
+
+            if (direction <= 0) //LINKS
+            {
+                direct = Direction.Left;
+                direction *= -1;
+            }
+            else if (direction > 0)
+            {
+                direct = Direction.Right;
+            }
+            else direct = Direction.Forward;
+
+            byte directionByte = Convert.ToByte(direction * 255);
+            byte speedByte = Convert.ToByte(speed * 255);
+
+            if (direct == Direction.Left)
+            {
+                rightSpeed = speedByte;
+                leftSpeed = Convert.ToByte(rightSpeed - directionByte);
+            }
+            else if (direct == Direction.Right)
+            {
+                leftSpeed = speedByte;
+                rightSpeed = Convert.ToByte(leftSpeed - directionByte);
+            }
+            else leftSpeed = rightSpeed = speedByte;
+
+            byte[] toReturn = new byte[2];
+            toReturn[0] = leftSpeed;
+            toReturn[1] = rightSpeed;
+
+            return toReturn;
+        }
     }
 }
