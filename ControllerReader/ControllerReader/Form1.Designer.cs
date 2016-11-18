@@ -28,59 +28,70 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnOpenPort = new System.Windows.Forms.Button();
-            this.btnSendTrigger = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblReturn = new System.Windows.Forms.Label();
+            this.btnConnect = new System.Windows.Forms.Button();
+            this.txtCom = new System.Windows.Forms.TextBox();
+            this.btnStartSending = new System.Windows.Forms.Button();
+            this.btnStopSending = new System.Windows.Forms.Button();
+            this.btnDisconnect = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btnOpenPort
+            // btnConnect
             // 
-            this.btnOpenPort.Location = new System.Drawing.Point(12, 12);
-            this.btnOpenPort.Name = "btnOpenPort";
-            this.btnOpenPort.Size = new System.Drawing.Size(75, 23);
-            this.btnOpenPort.TabIndex = 0;
-            this.btnOpenPort.Text = "Open Port";
-            this.btnOpenPort.UseVisualStyleBackColor = true;
-            this.btnOpenPort.Click += new System.EventHandler(this.btnOpenPort_Click);
+            this.btnConnect.Location = new System.Drawing.Point(118, 10);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(75, 23);
+            this.btnConnect.TabIndex = 1;
+            this.btnConnect.Text = "connect";
+            this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
-            // btnSendTrigger
+            // txtCom
             // 
-            this.btnSendTrigger.Location = new System.Drawing.Point(12, 41);
-            this.btnSendTrigger.Name = "btnSendTrigger";
-            this.btnSendTrigger.Size = new System.Drawing.Size(75, 23);
-            this.btnSendTrigger.TabIndex = 1;
-            this.btnSendTrigger.Text = "SendTrigger";
-            this.btnSendTrigger.UseVisualStyleBackColor = true;
-            this.btnSendTrigger.Click += new System.EventHandler(this.btnSendTrigger_Click);
+            this.txtCom.Location = new System.Drawing.Point(12, 12);
+            this.txtCom.Name = "txtCom";
+            this.txtCom.Size = new System.Drawing.Size(100, 20);
+            this.txtCom.TabIndex = 2;
             // 
-            // label1
+            // btnStartSending
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(93, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Arduino returns:";
+            this.btnStartSending.Location = new System.Drawing.Point(12, 38);
+            this.btnStartSending.Name = "btnStartSending";
+            this.btnStartSending.Size = new System.Drawing.Size(87, 23);
+            this.btnStartSending.TabIndex = 3;
+            this.btnStartSending.Text = "Start sending";
+            this.btnStartSending.UseVisualStyleBackColor = true;
+            this.btnStartSending.Click += new System.EventHandler(this.btnStartSending_Click);
             // 
-            // lblReturn
+            // btnStopSending
             // 
-            this.lblReturn.AutoSize = true;
-            this.lblReturn.Location = new System.Drawing.Point(180, 17);
-            this.lblReturn.Name = "lblReturn";
-            this.lblReturn.Size = new System.Drawing.Size(35, 13);
-            this.lblReturn.TabIndex = 3;
-            this.lblReturn.Text = "label2";
+            this.btnStopSending.Location = new System.Drawing.Point(106, 38);
+            this.btnStopSending.Name = "btnStopSending";
+            this.btnStopSending.Size = new System.Drawing.Size(87, 23);
+            this.btnStopSending.TabIndex = 4;
+            this.btnStopSending.Text = "Stop sending";
+            this.btnStopSending.UseVisualStyleBackColor = true;
+            this.btnStopSending.Click += new System.EventHandler(this.btnStopSending_Click);
+            // 
+            // btnDisconnect
+            // 
+            this.btnDisconnect.Location = new System.Drawing.Point(199, 10);
+            this.btnDisconnect.Name = "btnDisconnect";
+            this.btnDisconnect.Size = new System.Drawing.Size(75, 23);
+            this.btnDisconnect.TabIndex = 5;
+            this.btnDisconnect.Text = "Disconnect";
+            this.btnDisconnect.UseVisualStyleBackColor = true;
+            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.lblReturn);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnSendTrigger);
-            this.Controls.Add(this.btnOpenPort);
+            this.Controls.Add(this.btnDisconnect);
+            this.Controls.Add(this.btnStopSending);
+            this.Controls.Add(this.btnStartSending);
+            this.Controls.Add(this.txtCom);
+            this.Controls.Add(this.btnConnect);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -91,10 +102,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnOpenPort;
-        private System.Windows.Forms.Button btnSendTrigger;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblReturn;
+        private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.TextBox txtCom;
+        private System.Windows.Forms.Button btnStartSending;
+        private System.Windows.Forms.Button btnStopSending;
+        private System.Windows.Forms.Button btnDisconnect;
     }
 }
 
