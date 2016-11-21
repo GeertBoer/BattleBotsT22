@@ -20,9 +20,16 @@ void loop() {
   if (Serial.available() > 0)
   {
     Serial.readBytes(byteArray, 3);
+    for(int i = 0; i < 3; i++)
+    {
+      Serial.println(byteArray[i]);
+    }
     analogWrite(ledSpeedRight, byteArray[2]);
     analogWrite(ledSpeedLeft, byteArray[1]);
     digitalWrite(ledDirection, byteArray[0] & 1);
-    Attack(byteArray[0]);
+    if(byteArray[0] & 2)
+    {
+      Attack(byteArray[0]);
+    }
   }
 }
