@@ -48,28 +48,41 @@ namespace ControllerReader
         public void Stop()
         {
             sendThread.Suspend();
-            sendTwoBytes(0, 0);
+            sendTwoBytes(0, 0, 0);
         }
 
         public void sendTriggers()
         {
             float rt = GamePad.GetState(Microsoft.Xna.Framework.PlayerIndex.One).Triggers.Right;
             float lt = GamePad.GetState(Microsoft.Xna.Framework.PlayerIndex.One).Triggers.Left;
-            sendTwoBytes(rt, lt);
+            float ls = GamePad.GetState(Microsoft.Xna.Framework.PlayerIndex.One).ThumbSticks.Left.X;
+            ButtonState btnA = GamePad.GetState(Microsoft.Xna.Framework.PlayerIndex.One).Buttons.A;
+
+            byte controlByte = makeControlByte(lt, rt, btnA);
+            byte[] speedByte = makeSpeedBytes(lt, rt, ls);
         }
 
-        private void sendTwoBytes(float leftFloat, float rightFloat)
+        private byte makeControlByte(float lt, float rt, ButtonState mustHit)
         {
-            leftFloat *= 255;
-            rightFloat *= 255;
-            byte leftByte = Convert.ToByte(leftFloat);
-            byte rightByte = Convert.ToByte(rightFloat);
+            byte toReturn = 0x00;
+            
 
-            byte[] arrayToSend = new byte[2];
-            arrayToSend[0] = leftByte;
-            arrayToSend[1] = rightByte;
+            if (lt < rt)
+            {
+                toReturn |= 0x01;
+            }
 
-            arduino.Write(arrayToSend, 0, 2);
+            if (mustHit == ButtonState.Pressed)
+            {
+                toReturn |= 0x02;
+            }
+
+            return toReturn;
+        }
+
+        private void sendThreeBytes(byte[] toSend)
+        {
+            arduino.Write(toSend, 0, 3);
         }
 
         private void sendAll()
@@ -77,7 +90,7 @@ namespace ControllerReader
             while (true)
             {
                 sendTriggers();
-                Thread.Sleep(2);
+                //Thread.Sleep(2);
             }
         }
 
@@ -93,7 +106,7 @@ namespace ControllerReader
         {
             if (arduino != null)
             {
-                sendTwoBytes(0, 0);
+                sendTwoBytes(0, 0, 0);
                 arduino.Close();
             }
             
@@ -104,41 +117,42 @@ namespace ControllerReader
             sendThread.Abort();
         }
 
-        private byte[] converter(float speed, float direction)
+        public byte[] makeSpeedBytes(float forwardSpeed, float backwardSpeed, float direction)
         {
-            Direction direct;
-            byte leftSpeed;
-            byte rightSpeed;
+            Direction rp6Direction;
+            float speed;
+            float rightMotorSpeed;
+            float leftMotorSpeed;
 
-            if (direction <= 0) //LINKS 
+            if (forwardSpeed > backwardSpeed)
             {
-                direct = Direction.Left;
-                direction *= -1;
+                rp6Direction = Direction.Forward;
+                speed = forwardSpeed;
             }
-            else if (direction > 0)
+            else
             {
-                direct = Direction.Right;
+                rp6Direction = Direction.Backward;
+                speed = backwardSpeed;
             }
-            else direct = Direction.Forward;
+            
+            float toSubtract = 0;
+            if (direction >= 0) //RIGHT
+            {
+                leftMotorSpeed = speed;
+                toSubtract = speed * direction;
+                rightMotorSpeed = speed - toSubtract;
+            }
+            else                //LEFT
+            {
+                rightMotorSpeed = speed;
+                toSubtract = speed * direction * -1;
+                leftMotorSpeed = speed - toSubtract;
+            }
 
-            byte directionByte = Convert.ToByte(direction * 255);
-            byte speedByte = Convert.ToByte(speed * 255);
+            byte leftMotorByte = Convert.ToByte(leftMotorSpeed * 255);
+            byte rightMotorByte = Convert.ToByte(rightMotorSpeed * 255);
 
-            if (direct == Direction.Left)
-            {
-                rightSpeed = speedByte;
-                leftSpeed = Convert.ToByte(rightSpeed - directionByte);
-            }
-            else if (direct == Direction.Right)
-            {
-                leftSpeed = speedByte;
-                rightSpeed = Convert.ToByte(leftSpeed - directionByte);
-            }
-            else leftSpeed = rightSpeed = speedByte;
-
-            byte[] toReturn = new byte[2];
-            toReturn[0] = leftSpeed;
-            toReturn[1] = rightSpeed;
+            byte[] toReturn = { leftMotorByte, rightMotorByte };
 
             return toReturn;
         }
