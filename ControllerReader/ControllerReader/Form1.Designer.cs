@@ -52,6 +52,7 @@
             this.txtCom.Name = "txtCom";
             this.txtCom.Size = new System.Drawing.Size(100, 20);
             this.txtCom.TabIndex = 2;
+            this.txtCom.Text = "18";
             // 
             // btnStartSending
             // 

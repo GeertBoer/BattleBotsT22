@@ -8,7 +8,7 @@ using System.IO.Ports;
 using Microsoft.Xna.Framework.Input;
 using System.Threading;
 
-namespace ControllerReader
+namespace ControllerLibRP6
 {
     class ControllerHandler
     {
@@ -23,7 +23,7 @@ namespace ControllerReader
         private void Arduino_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             int incoming = arduino.ReadByte();
-            Console.WriteLine(incoming); 
+            Console.WriteLine(incoming);
         }
 
         public void Connect(int comPort)
@@ -98,7 +98,7 @@ namespace ControllerReader
             while (true)
             {
                 sendTriggers();
-                Thread.Sleep(5);
+                //Thread.Sleep(2);
             }
         }
 
@@ -146,7 +146,7 @@ namespace ControllerReader
                 rp6Direction = Direction.Backward;
                 speed = backwardSpeed;
             }
-            
+
             float toSubtract = 0;
             if (direction >= 0) //RIGHT
             {

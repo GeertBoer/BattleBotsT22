@@ -1,0 +1,15 @@
+c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\bin\Release\ControllerLibRP6.dll
+c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\bin\Release\ControllerLibRP6.pdb
+c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\bin\Release\MonoGame.Framework.dll
+c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\bin\Release\SharpDX.MediaFoundation.dll
+c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\bin\Release\SharpDX.dll
+c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\bin\Release\SharpDX.XAudio2.dll
+c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\bin\Release\SharpDX.DXGI.dll
+c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\bin\Release\SharpDX.Direct3D11.dll
+c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\bin\Release\SharpDX.Direct2D1.dll
+c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\bin\Release\SharpDX.XInput.dll
+c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\bin\Release\SharpDX.RawInput.dll
+c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\bin\Release\SharpDX.Direct3D9.dll
+c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\bin\Release\MonoGame.Framework.xml
+c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\obj\Release\ControllerLibRP6.dll
+c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\obj\Release\ControllerLibRP6.pdb
