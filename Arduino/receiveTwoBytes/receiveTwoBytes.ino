@@ -1,18 +1,15 @@
+#include "Rp6.h"
 byte byteArray[3];
+RP6_DIRECTION dir = RP6_FORWARD;
 int buttonHit = 6;
 int buttonGotHit = 7;
-int ledAttack = 12;
-int ledSpeedRight = 11;
-int ledSpeedLeft = 10;
-int ledDirection = 9;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
+  Rp6.begin();
   pinMode(buttonHit, INPUT);
   pinMode(buttonGotHit, INPUT);
-  pinMode(ledDirection, OUTPUT);
-  pinMode(ledAttack, OUTPUT);
 }
 
 void loop() {
@@ -20,13 +17,18 @@ void loop() {
   if (Serial.available() > 0)
   {
     Serial.readBytes(byteArray, 3);
-    for(int i = 0; i < 3; i++)
-    {
-      Serial.println(byteArray[i]);
-    }
-    analogWrite(ledSpeedRight, byteArray[2]);
-    analogWrite(ledSpeedLeft, byteArray[1]);
-    digitalWrite(ledDirection, byteArray[0] & 1);
+    Rp6.moveAtSpeed(byteArray[1], byteArray[2]);
+//    if((byteArray[0] & 1) && (dir == RP6_FORWARD))
+//    {
+//      dir = RP6_BACKWARD;
+//      Rp6.changeDirection(RP6_BACKWARD);
+//    }
+//    else if(((byteArray[0] & 1) == false )&& (dir == RP6_BACKWARD))
+//    {
+//      dir = RP6_FORWARD;
+//      Rp6.changeDirection(RP6_FORWARD);
+//    }
+    
     if(byteArray[0] & 2)
     {
       Attack(byteArray[0]);
