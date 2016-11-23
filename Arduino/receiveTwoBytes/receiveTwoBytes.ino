@@ -10,8 +10,6 @@ void setup() {
   Rp6.begin();
   pinMode(buttonHit, INPUT);
   pinMode(buttonGotHit, INPUT);
-  pinMode(5, OUTPUT);
-  pinMode(6, OUTPUT);
 }
 
 void loop() {
@@ -35,7 +33,5 @@ void loop() {
     {
       Attack(byteArray[0]);
     }
-    analogWrite(5, byteArray[1]);
-    analogWrite(6, byteArray[2]);
   }
 }
