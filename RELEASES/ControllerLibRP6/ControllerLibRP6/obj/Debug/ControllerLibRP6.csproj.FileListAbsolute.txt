@@ -14,3 +14,19 @@ c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\Controller
 c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\bin\Debug\MonoGame.Framework.xml
 c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\obj\Debug\ControllerLibRP6.dll
 c:\users\geert\documents\visual studio 2015\Projects\ControllerLibRP6\ControllerLibRP6\obj\Debug\ControllerLibRP6.pdb
+C:\Users\geert\Source\Repos\BattleBotsT22\RELEASES\ControllerLibRP6\ControllerLibRP6\bin\Debug\ControllerLibRP6.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\RELEASES\ControllerLibRP6\ControllerLibRP6\bin\Debug\ControllerLibRP6.pdb
+C:\Users\geert\Source\Repos\BattleBotsT22\RELEASES\ControllerLibRP6\ControllerLibRP6\bin\Debug\MonoGame.Framework.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\RELEASES\ControllerLibRP6\ControllerLibRP6\bin\Debug\SharpDX.MediaFoundation.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\RELEASES\ControllerLibRP6\ControllerLibRP6\bin\Debug\SharpDX.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\RELEASES\ControllerLibRP6\ControllerLibRP6\bin\Debug\SharpDX.XAudio2.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\RELEASES\ControllerLibRP6\ControllerLibRP6\bin\Debug\SharpDX.DXGI.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\RELEASES\ControllerLibRP6\ControllerLibRP6\bin\Debug\SharpDX.Direct3D11.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\RELEASES\ControllerLibRP6\ControllerLibRP6\bin\Debug\SharpDX.Direct2D1.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\RELEASES\ControllerLibRP6\ControllerLibRP6\bin\Debug\SharpDX.XInput.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\RELEASES\ControllerLibRP6\ControllerLibRP6\bin\Debug\SharpDX.RawInput.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\RELEASES\ControllerLibRP6\ControllerLibRP6\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\RELEASES\ControllerLibRP6\ControllerLibRP6\bin\Debug\MonoGame.Framework.xml
+C:\Users\geert\Source\Repos\BattleBotsT22\RELEASES\ControllerLibRP6\ControllerLibRP6\obj\Debug\ControllerLibRP6.csprojResolveAssemblyReference.cache
+C:\Users\geert\Source\Repos\BattleBotsT22\RELEASES\ControllerLibRP6\ControllerLibRP6\obj\Debug\ControllerLibRP6.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\RELEASES\ControllerLibRP6\ControllerLibRP6\obj\Debug\ControllerLibRP6.pdb

@@ -10,14 +10,39 @@ using System.Threading;
 
 namespace ControllerLibRP6
 {
-    class ControllerHandler
+    public class ControllerHandler
     {
         private SerialPort arduino;
         private Thread sendThread;
 
-        public ControllerHandler()
+        public bool AllowSending = true;
+
+        public ControllerHandler(int comPort)
         {
             sendThread = new Thread(sendAll);
+            connect(comPort);
+        }
+
+        private void connect(int comPort)
+        {
+            arduino = new SerialPort("COM" + comPort);
+            arduino.Open();
+            arduino.DataReceived += Arduino_DataReceived;
+        }
+
+        public void Disconnect()
+        {
+            stopSending();
+            disconnectCom();
+        }
+
+        public void PauseSending()
+        {
+            if (sendThread.ThreadState == ThreadState.Running)
+            {
+                stopRP6();
+                sendThread.Suspend();
+            }
         }
 
         private void Arduino_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -26,37 +51,7 @@ namespace ControllerLibRP6
             Console.WriteLine(incoming);
         }
 
-        public void Connect(int comPort)
-        {
-            arduino = new SerialPort("COM" + comPort);
-            arduino.Open();
-            arduino.DataReceived += Arduino_DataReceived;
-        }
-
-        public void Start()
-        {
-            if (sendThread.ThreadState == ThreadState.Unstarted)
-            {
-                sendThread.Start();
-            }
-            else if (sendThread.ThreadState == ThreadState.Suspended)
-            {
-                sendThread.Resume();
-            }
-        }
-
-        public void Stop()
-        {
-            if (sendThread.ThreadState != ThreadState.Unstarted || sendThread.ThreadState != ThreadState.Suspended)
-            {
-                byte[] nullArray = { 0, 0, 0 };
-                sendThreeBytes(nullArray);
-
-                sendThread.Suspend();
-            }
-        }
-
-        public void sendTriggers()
+        private void sendTriggers()
         {
             float rt = GamePad.GetState(Microsoft.Xna.Framework.PlayerIndex.One).Triggers.Right;
             float lt = GamePad.GetState(Microsoft.Xna.Framework.PlayerIndex.One).Triggers.Left;
@@ -90,7 +85,10 @@ namespace ControllerLibRP6
 
         private void sendThreeBytes(byte[] toSend)
         {
-            arduino.Write(toSend, 0, 3);
+            if (AllowSending == true)
+            {
+                arduino.Write(toSend, 0, 3);
+            }
         }
 
         private void sendAll()
@@ -98,38 +96,17 @@ namespace ControllerLibRP6
             while (true)
             {
                 sendTriggers();
-                //Thread.Sleep(2);
+                Thread.Sleep(5);
             }
         }
 
-        public void DisconnectCom()
+        private void stopRP6()
         {
-            if (arduino.IsOpen)
-            {
-                byte[] nullArray = { 0, 0, 0 };
-                sendThreeBytes(nullArray);
-                arduino.Close();
-            }
+            byte[] nullArray = { 0, 0, 0 };
+            sendThreeBytes(nullArray);
         }
 
-        public void CleanUp()
-        {
-            if (arduino != null)
-            {
-                DisconnectCom();
-            }
-
-            if (sendThread.ThreadState != ThreadState.Unstarted)
-            {
-                if (sendThread.ThreadState == ThreadState.Suspended)
-                {
-                    sendThread.Resume();
-                }
-                sendThread.Abort();
-            }
-        }
-
-        public byte[] makeSpeedBytes(float forwardSpeed, float backwardSpeed, float direction)
+        private byte[] makeSpeedBytes(float forwardSpeed, float backwardSpeed, float direction)
         {
             Direction rp6Direction;
             float speed;
@@ -167,6 +144,27 @@ namespace ControllerLibRP6
             byte[] toReturn = { leftMotorByte, rightMotorByte };
 
             return toReturn;
+        }
+
+        private void stopSending()
+        { 
+            if (sendThread.ThreadState == ThreadState.Suspended)
+            {
+                sendThread.Resume();
+                sendThread.Abort();
+            } 
+            if ((sendThread.ThreadState != ThreadState.Aborted) || (sendThread.ThreadState != ThreadState.Unstarted))
+            {
+                sendThread.Abort();
+            }
+        }
+
+        private void disconnectCom()
+        {
+            if (arduino.IsOpen)
+            {
+                arduino.Close();
+            }
         }
     }
 }
