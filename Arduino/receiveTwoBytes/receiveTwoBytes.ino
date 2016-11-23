@@ -1,24 +1,17 @@
-<<<<<<< HEAD
 #include "Rp6.h"
 byte byteArray[3];
 RP6_DIRECTION dir = RP6_FORWARD;
 int buttonHit = 6;
 int buttonGotHit = 7;
-=======
-byte byteArray[3];
->>>>>>> origin/master
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-<<<<<<< HEAD
   Rp6.begin();
   pinMode(buttonHit, INPUT);
   pinMode(buttonGotHit, INPUT);
-=======
   pinMode(5, OUTPUT);
   pinMode(6, OUTPUT);
->>>>>>> origin/master
 }
 
 void loop() {
@@ -26,7 +19,6 @@ void loop() {
   if (Serial.available() > 0)
   {
     Serial.readBytes(byteArray, 3);
-<<<<<<< HEAD
     Rp6.moveAtSpeed(byteArray[1], byteArray[2]);
 //    if((byteArray[0] & 1) && (dir == RP6_FORWARD))
 //    {
@@ -43,9 +35,7 @@ void loop() {
     {
       Attack(byteArray[0]);
     }
-=======
     analogWrite(5, byteArray[1]);
     analogWrite(6, byteArray[2]);
->>>>>>> origin/master
   }
 }
