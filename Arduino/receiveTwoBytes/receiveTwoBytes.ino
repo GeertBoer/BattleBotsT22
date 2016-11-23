@@ -34,4 +34,18 @@ void loop() {
       Attack(byteArray[0]);
     }
   }
+  if(buttonHit || buttonGotHit)
+  {
+    //Marijn moet hier even zorgen dat dit if werken als hij wordt geraakt of raakt
+    byte respond = 0;
+    if(buttonHit)
+    {
+      respond |= 2;
+    }
+    if(buttonGotHit)
+    {
+      respond |= 1;
+    }
+    Serial.println(respond);
+  }
 }
