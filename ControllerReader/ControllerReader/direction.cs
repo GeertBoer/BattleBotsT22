@@ -8,8 +8,7 @@ namespace ControllerReader
 {
     public enum Direction
     {
-        Left,
-        Right,
         Forward,
+        Backward,
     };
 }
