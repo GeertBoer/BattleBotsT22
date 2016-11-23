@@ -17,8 +17,8 @@ namespace ControllerLibRP6
 
         public bool AllowSending = true;
 
-        private bool JostGotHit = false;
         private bool JustHitSomeone = false;
+        private bool JustGotHit = false;
 
         public delegate void GotHitHandler(object sender, EventArgs e);
         public static event GotHitHandler GotHit;
@@ -110,11 +110,13 @@ namespace ControllerLibRP6
             if (JustHitSomeone == true)
             {
                 toReturn |= 0x04;
+                JustHitSomeone = false;
             }
 
-            if (JustHitSomeone == false)
+            if (JustGotHit == true)
             {
                 toReturn |= 0x05;
+                JustGotHit = false;
             }
 
             return toReturn;
