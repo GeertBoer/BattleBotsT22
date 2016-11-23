@@ -17,6 +17,23 @@ namespace ControllerLibRP6
 
         public bool AllowSending = true;
 
+        private bool JostGotHit = false;
+        private bool JustHitSomeone = false;
+
+        public delegate void GotHitHandler(object sender, EventArgs e);
+        public static event GotHitHandler GotHit;
+        private static void OnGotHit(EventArgs e)
+        {
+            GotHit(null, e);
+        }
+
+        public delegate void HitSomeoneHandler(object sender, EventArgs e);
+        public static event HitSomeoneHandler HitSomeone;
+        private static void OnHitSomeone(EventArgs e)
+        {
+            HitSomeone(null, e);
+        }
+
         public ControllerHandler(int comPort)
         {
             sendThread = new Thread(sendAll);
@@ -47,8 +64,18 @@ namespace ControllerLibRP6
 
         private void Arduino_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            int incoming = arduino.ReadByte();
-            Console.WriteLine(incoming);
+            byte responseByte = Convert.ToByte(arduino.ReadByte());
+            if ((responseByte & 0x01) != 0)
+            {
+                OnGotHit(EventArgs.Empty);
+                JustHitSomeone = true;
+            }
+            if ((responseByte & 0x02) != 0)
+            {
+                OnHitSomeone(EventArgs.Empty);
+                JustHitSomeone = true;
+            }
+            
         }
 
         private void sendTriggers()
@@ -78,6 +105,16 @@ namespace ControllerLibRP6
             if (mustHit == ButtonState.Pressed)
             {
                 toReturn |= 0x02;
+            }
+
+            if (JustHitSomeone == true)
+            {
+                toReturn |= 0x04;
+            }
+
+            if (JustHitSomeone == false)
+            {
+                toReturn |= 0x05;
             }
 
             return toReturn;
