@@ -15,7 +15,6 @@ const int yellow = 12;
 const int orange = 13;
 
 bool attack = true;
-bool attackDirection = true;
 int steps = 0;
 int stepsLeft = 0;
 unsigned long lastTick;
@@ -52,26 +51,34 @@ void loop() {
     //Serial.println("daar");
     Rp6.moveAtSpeed(byteArray[1], byteArray[2]);
     //Serial.println("RP6Move");
-    //    if((byteArray[0] & 1) && (dir == RP6_FORWARD))
-    //    {
-    //      dir = RP6_BACKWARD;
-    //      Rp6.changeDirection(RP6_BACKWARD);
-    //    }
-    //    else if(((byteArray[0] & 1) == false )&& (dir == RP6_BACKWARD))
-    //    {
-    //      dir = RP6_FORWARD;
-    //      Rp6.changeDirection(RP6_FORWARD);
-    //    }
-
-    if (byteArray[0] & 2 || attack == true)
+    if ((byteArray[0] & 1) && (dir == RP6_FORWARD))
     {
-      //Serial.println("Hier");
-      long timeNow = micros();
-      //if (timeNow - lastTick >= 500)
-      //{
-        AttackTick();
-        lastTick = timeNow;
-      //}
+      dir = RP6_BACKWARD;
+      Rp6.moveAtSpeed(0, 0);
+      Rp6.changeDirection(RP6_BACKWARD);
+    }
+    else if (((byteArray[0] & 1) == false ) && (dir == RP6_BACKWARD))
+    {
+      dir = RP6_FORWARD;
+      Rp6.moveAtSpeed(0, 0);
+      Rp6.changeDirection(RP6_FORWARD);
+    }
+
+    if (byteArray[0] & 2)
+    {
+      if (stepsLeft < 700)
+      {
+        stepperTick(true);
+        stepsLeft++;
+      }
+    }
+    else
+    {
+      if (stepsLeft > 0)
+      {
+        stepperTick(false);
+        stepsLeft--;
+      }
     }
   }
   if (digitalRead(buttonHit) || digitalRead(buttonGotHit))
@@ -87,24 +94,6 @@ void loop() {
     }
     Serial.println(respond);
   }
-}
-
-void AttackTick()
-{
-  /*if (stepsLeft >= 0)
-  {
-    stepperTick(attackDirection);
-    stepsLeft--;
-  }
-  else if (stepsLeft < 0)
-  {
-    attack = false;
-    stepsLeft = recoverSteps;
-  }*/
-  steps = attackSteps;
-  stepperTick(attackDirection);
-  steps = recoverSteps;
-  stepperTick(!attackDirection);
 }
 
 void stepperTick(bool dir) {
