@@ -38,6 +38,7 @@ namespace ControllerLibRP6
         {
             sendThread = new Thread(sendAll);
             connect(comPort);
+            sendThread.Start();
         }
 
         private void connect(int comPort)
@@ -65,17 +66,17 @@ namespace ControllerLibRP6
         private void Arduino_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             byte responseByte = Convert.ToByte(arduino.ReadByte());
+            Console.WriteLine(responseByte);
             if ((responseByte & 0x01) != 0)
             {
                 OnGotHit(EventArgs.Empty);
-                JustHitSomeone = true;
+                JustGotHit = true;
             }
             if ((responseByte & 0x02) != 0)
             {
                 OnHitSomeone(EventArgs.Empty);
                 JustHitSomeone = true;
             }
-            
         }
 
         private void sendTriggers()
@@ -109,13 +110,13 @@ namespace ControllerLibRP6
 
             if (JustHitSomeone == true)
             {
-                toReturn |= 0x04;
+                toReturn |= 0x10;
                 JustHitSomeone = false;
             }
 
             if (JustGotHit == true)
             {
-                toReturn |= 0x05;
+                toReturn |= 0x20;
                 JustGotHit = false;
             }
 
@@ -135,7 +136,7 @@ namespace ControllerLibRP6
             while (true)
             {
                 sendTriggers();
-                Thread.Sleep(5);
+                Thread.Sleep(35);
             }
         }
 

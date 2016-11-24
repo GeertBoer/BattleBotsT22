@@ -45,6 +45,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lblTimesHitSomeone = new System.Windows.Forms.Label();
             this.lblTimesGotHit = new System.Windows.Forms.Label();
+            this.testlabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudGroupNumber)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -87,6 +88,7 @@
             this.txtIPAdress.Name = "txtIPAdress";
             this.txtIPAdress.Size = new System.Drawing.Size(100, 20);
             this.txtIPAdress.TabIndex = 2;
+            this.txtIPAdress.Text = "192.168.137.1";
             // 
             // label2
             // 
@@ -148,7 +150,7 @@
             this.txtComPort.Name = "txtComPort";
             this.txtComPort.Size = new System.Drawing.Size(88, 20);
             this.txtComPort.TabIndex = 7;
-            this.txtComPort.Text = "18";
+            this.txtComPort.Text = "19";
             // 
             // label3
             // 
@@ -229,11 +231,21 @@
             this.lblTimesGotHit.TabIndex = 16;
             this.lblTimesGotHit.Text = "0";
             // 
+            // testlabel
+            // 
+            this.testlabel.AutoSize = true;
+            this.testlabel.Location = new System.Drawing.Point(180, 152);
+            this.testlabel.Name = "testlabel";
+            this.testlabel.Size = new System.Drawing.Size(46, 13);
+            this.testlabel.TabIndex = 17;
+            this.testlabel.Text = "testlabel";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(427, 177);
+            this.Controls.Add(this.testlabel);
             this.Controls.Add(this.lblTimesGotHit);
             this.Controls.Add(this.lblTimesHitSomeone);
             this.Controls.Add(this.label5);
@@ -271,6 +283,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblTimesHitSomeone;
         private System.Windows.Forms.Label lblTimesGotHit;
+        private System.Windows.Forms.Label testlabel;
     }
 }
 
