@@ -21,15 +21,15 @@ namespace ControllerLibRP6
         private bool JustGotHit = false;
 
         public delegate void GotHitHandler(object sender, EventArgs e);
-        public static event GotHitHandler GotHit;
-        private static void OnGotHit(EventArgs e)
+        public event GotHitHandler GotHit;
+        private void OnGotHit(EventArgs e)
         {
             GotHit(null, e);
         }
 
         public delegate void HitSomeoneHandler(object sender, EventArgs e);
-        public static event HitSomeoneHandler HitSomeone;
-        private static void OnHitSomeone(EventArgs e)
+        public event HitSomeoneHandler HitSomeone;
+        private void OnHitSomeone(EventArgs e)
         {
             HitSomeone(null, e);
         }

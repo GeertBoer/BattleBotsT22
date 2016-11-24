@@ -41,6 +41,10 @@
             this.btnOverrideStart = new System.Windows.Forms.Button();
             this.btnDisconnectController = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblTimesHitSomeone = new System.Windows.Forms.Label();
+            this.lblTimesGotHit = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudGroupNumber)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -189,11 +193,51 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Controller Operations";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 141);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(98, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Times hit someone:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(37, 154);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(70, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Times got hit:";
+            // 
+            // lblTimesHitSomeone
+            // 
+            this.lblTimesHitSomeone.AutoSize = true;
+            this.lblTimesHitSomeone.Location = new System.Drawing.Point(113, 141);
+            this.lblTimesHitSomeone.Name = "lblTimesHitSomeone";
+            this.lblTimesHitSomeone.Size = new System.Drawing.Size(13, 13);
+            this.lblTimesHitSomeone.TabIndex = 15;
+            this.lblTimesHitSomeone.Text = "0";
+            // 
+            // lblTimesGotHit
+            // 
+            this.lblTimesGotHit.AutoSize = true;
+            this.lblTimesGotHit.Location = new System.Drawing.Point(113, 154);
+            this.lblTimesGotHit.Name = "lblTimesGotHit";
+            this.lblTimesGotHit.Size = new System.Drawing.Size(13, 13);
+            this.lblTimesGotHit.TabIndex = 16;
+            this.lblTimesGotHit.Text = "0";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(427, 141);
+            this.ClientSize = new System.Drawing.Size(427, 177);
+            this.Controls.Add(this.lblTimesGotHit);
+            this.Controls.Add(this.lblTimesHitSomeone);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "MainForm";
@@ -204,6 +248,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -222,6 +267,10 @@
         private System.Windows.Forms.Button btnOverrideStart;
         private System.Windows.Forms.Button btnDisconnectController;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblTimesHitSomeone;
+        private System.Windows.Forms.Label lblTimesGotHit;
     }
 }
 

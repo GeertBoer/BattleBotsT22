@@ -21,3 +21,26 @@ c:\users\geert\documents\visual studio 2015\Projects\T22Hub\T22Hub\bin\Debug\Sha
 c:\users\geert\documents\visual studio 2015\Projects\T22Hub\T22Hub\bin\Debug\ControllerLibRP6.pdb
 c:\users\geert\documents\visual studio 2015\Projects\T22Hub\T22Hub\bin\Debug\MonoGame.Framework.xml
 C:\Users\geert\documents\visual studio 2015\Projects\T22Hub\T22Hub\obj\Debug\T22Hub.MainForm.resources
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\bin\Debug\T22Hub.exe.config
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\obj\Debug\T22Hub.exe
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\obj\Debug\T22Hub.pdb
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\obj\Debug\T22Hub.csprojResolveAssemblyReference.cache
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\obj\Debug\T22Hub.MainForm.resources
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\obj\Debug\T22Hub.Properties.Resources.resources
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\obj\Debug\T22Hub.csproj.GenerateResource.Cache
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\bin\Debug\T22Hub.exe
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\bin\Debug\T22Hub.pdb
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\bin\Debug\ClientLib.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\bin\Debug\ControllerLibRP6.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\bin\Debug\MonoGame.Framework.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\bin\Debug\SharpDX.MediaFoundation.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\bin\Debug\SharpDX.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\bin\Debug\SharpDX.XAudio2.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\bin\Debug\SharpDX.DXGI.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\bin\Debug\SharpDX.Direct3D11.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\bin\Debug\SharpDX.Direct2D1.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\bin\Debug\SharpDX.XInput.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\bin\Debug\SharpDX.RawInput.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\bin\Debug\ControllerLibRP6.pdb
+C:\Users\geert\Source\Repos\BattleBotsT22\T22Hub\T22Hub\bin\Debug\MonoGame.Framework.xml

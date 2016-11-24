@@ -16,7 +16,9 @@ namespace T22Hub
     {
         private int AmountOfPenalties = 0;
         private ControllerHandler controller;
-        private bool controllerHasStarted;
+
+        private int timesHitSomeone = 0;
+        private int timesGotHit = 0;
 
         public MainForm()
         {
@@ -25,7 +27,6 @@ namespace T22Hub
             Client.Client.GameStopped += Client_GameStopped;
             Client.Client.GameStarted += Client_GameStarted;
             Client.Client.PenaltyReceived += Client_PenaltyReceived;
-            controllerHasStarted = false;
         }
 
         private void Client_PenaltyReceived(object sender, EventArgs e)
@@ -41,6 +42,9 @@ namespace T22Hub
         private void Client_GameStopped(object sender, EventArgs e)
         {
             controller.AllowSending = false;
+            timesHitSomeone = 0;
+            timesGotHit = 0;
+            updateLabels();
         }
 
         private void Client_GamePaused(object sender, EventArgs e)
@@ -50,46 +54,81 @@ namespace T22Hub
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            string groupNumber = nudGroupNumber.Value.ToString();
-            string ip = txtIPAdress.Text;
+            if (!string.IsNullOrEmpty(txtIPAdress.Text))
+            {
+                string groupNumber = nudGroupNumber.Value.ToString();
+                string ip = txtIPAdress.Text;
 
-            Client.Client.Connect(groupNumber, ip, 5000);
+                Client.Client.Connect(groupNumber, ip, 5000);
+            }
+            else MessageBox.Show("Vul een ip-adres in");
         }
 
         private void btnDisconnectHub_Click(object sender, EventArgs e)
         {
-            Client.Client.Close();
+            try
+            {
+                Client.Client.Close();
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Er is geen connectie om te verbreken.");
+            }
         }
-        
+
         private void btnConnectController_Click(object sender, EventArgs e)
         {
             if (controller == null)
             {
                 int com = Convert.ToInt32(txtComPort.Text);
-                controller = new ControllerHandler(com);
-                controller.GotHit += Controller_GotHit;
-                controller.HitSomeone += Controller_HitSomeone;
+                try
+                {
+                    controller = new ControllerHandler(com);
+                    controller.GotHit += Controller_GotHit;
+                    controller.HitSomeone += Controller_HitSomeone;
+                }
+                catch (System.IO.IOException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
         private void Controller_HitSomeone(object sender, EventArgs e)
         {
             Client.Client.Punt();
+            timesHitSomeone++;
+            updateLabels();
         }
 
         private void Controller_GotHit(object sender, EventArgs e)
         {
             Client.Client.Hit();
+            timesGotHit++;
+            updateLabels();
         }
 
         private void btnOverrideStart_Click(object sender, EventArgs e)
         {
-            controller.AllowSending = true;
+            if (controller != null)
+            {
+                controller.AllowSending = true;
+            }
+            else MessageBox.Show("De controller functie is nog niet gestart");
         }
 
         private void btnDisconnectController_Click(object sender, EventArgs e)
         {
-            controller.Disconnect();
+            if (controller != null)
+            {
+                controller.Disconnect();
+            }
+        }
+
+        private void updateLabels()
+        {
+            lblTimesGotHit.Text = timesGotHit.ToString();
+            lblTimesHitSomeone.Text = timesHitSomeone.ToString();
         }
     }
 }
