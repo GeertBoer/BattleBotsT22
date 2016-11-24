@@ -41,7 +41,9 @@ void loop() {
   if (Serial.available() > 0)
   {
     Serial.readBytes(byteArray, 3);
+    Serial.println("daar");
     Rp6.moveAtSpeed(byteArray[1], byteArray[2]);
+    Serial.println("RP6Move");
 //    if((byteArray[0] & 1) && (dir == RP6_FORWARD))
 //    {
 //      dir = RP6_BACKWARD;
@@ -61,7 +63,6 @@ void loop() {
   }
   if(digitalRead(buttonHit) || digitalRead(buttonGotHit))
   {
-    //Marijn moet hier even zorgen dat dit if werken als hij wordt geraakt of raakt
     byte respond = 0;
     if(digitalRead(buttonHit))
     {
