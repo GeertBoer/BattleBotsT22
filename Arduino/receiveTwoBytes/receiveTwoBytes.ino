@@ -4,7 +4,7 @@
 #define attackSteps 700
 #define recoverSteps 500
 
-byte byteArray[3];
+byte byteArray[4];
 RP6_DIRECTION dir = RP6_FORWARD;
 const int buttonHit = 8;
 const int buttonGotHit = 9;
@@ -14,10 +14,15 @@ const int pink = 11;
 const int yellow = 12;
 const int orange = 13;
 
-bool attack = false;
+bool attack = true;
+bool attackDirection = true;
 int steps = 0;
 int stepsLeft = 0;
 unsigned long lastTick;
+
+String message = "";
+bool reading = false;
+bool messageComplete = false;
 
 void setup() {
   // put your setup code here, to run once:
@@ -32,43 +37,51 @@ void setup() {
   pinMode(orange, OUTPUT);
 
   //start one attack
-  attack = true;
-  stepsLeft = attackSteps;
+  //attack = true;
+  //stepsLeft = attackSteps;
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   if (Serial.available() > 0)
   {
-    Serial.readBytes(byteArray, 3);
-    Serial.println("daar");
-    Rp6.moveAtSpeed(byteArray[1], byteArray[2]);
-    Serial.println("RP6Move");
-//    if((byteArray[0] & 1) && (dir == RP6_FORWARD))
-//    {
-//      dir = RP6_BACKWARD;
-//      Rp6.changeDirection(RP6_BACKWARD);
-//    }
-//    else if(((byteArray[0] & 1) == false )&& (dir == RP6_BACKWARD))
-//    {
-//      dir = RP6_FORWARD;
-//      Rp6.changeDirection(RP6_FORWARD);
-//    }
-    
-    if(byteArray[0] & 2)
+    if (Serial.read() == '%')
     {
-      Serial.println("Hier");
-      AttackTick();
+      Serial.readBytes(byteArray, 3);
+    }
+    //Serial.println("daar");
+    Rp6.moveAtSpeed(byteArray[1], byteArray[2]);
+    //Serial.println("RP6Move");
+    //    if((byteArray[0] & 1) && (dir == RP6_FORWARD))
+    //    {
+    //      dir = RP6_BACKWARD;
+    //      Rp6.changeDirection(RP6_BACKWARD);
+    //    }
+    //    else if(((byteArray[0] & 1) == false )&& (dir == RP6_BACKWARD))
+    //    {
+    //      dir = RP6_FORWARD;
+    //      Rp6.changeDirection(RP6_FORWARD);
+    //    }
+
+    if (byteArray[0] & 2 || attack == true)
+    {
+      //Serial.println("Hier");
+      long timeNow = micros();
+      //if (timeNow - lastTick >= 500)
+      //{
+        AttackTick();
+        lastTick = timeNow;
+      //}
     }
   }
-  if(digitalRead(buttonHit) || digitalRead(buttonGotHit))
+  if (digitalRead(buttonHit) || digitalRead(buttonGotHit))
   {
     byte respond = 0;
-    if(digitalRead(buttonHit))
+    if (digitalRead(buttonHit))
     {
       respond |= 2;
     }
-    if(digitalRead(buttonGotHit))
+    if (digitalRead(buttonGotHit))
     {
       respond |= 1;
     }
@@ -78,23 +91,24 @@ void loop() {
 
 void AttackTick()
 {
-  if (stepsLeft >= 0)
+  /*if (stepsLeft >= 0)
   {
-    if (micros() - lastTick >= 1000)
-    {
-      stepperTick(attack);
-      lastTick = micros();
-      stepsLeft--;
-    }
+    stepperTick(attackDirection);
+    stepsLeft--;
   }
-  else if (attack)
+  else if (stepsLeft < 0)
   {
     attack = false;
     stepsLeft = recoverSteps;
-  }
+  }*/
+  steps = attackSteps;
+  stepperTick(attackDirection);
+  steps = recoverSteps;
+  stepperTick(!attackDirection);
 }
 
 void stepperTick(bool dir) {
+  //Serial.println("Test");
   switch (steps)
   {
     case 0:
@@ -102,28 +116,28 @@ void stepperTick(bool dir) {
       digitalWrite(pink, HIGH);
       digitalWrite(yellow, LOW);
       digitalWrite(orange, LOW);
-      delay(3);
+      //delay(3);
       break;
     case 1:
       digitalWrite(blue, LOW);
       digitalWrite(pink, HIGH);
       digitalWrite(yellow, HIGH);
       digitalWrite(orange, LOW);
-      delay(3);
+      //delay(3);
       break;
     case 2:
       digitalWrite(blue, LOW);
       digitalWrite(pink, LOW);
       digitalWrite(yellow, HIGH);
       digitalWrite(orange, HIGH);
-      delay(3);
+      //delay(3);
       break;
     case 3:
       digitalWrite(blue, HIGH);
       digitalWrite(pink, LOW);
       digitalWrite(yellow, LOW);
       digitalWrite(orange, HIGH);
-      delay(3);
+      //delay(3);
       break;
   }
   if (!dir)
