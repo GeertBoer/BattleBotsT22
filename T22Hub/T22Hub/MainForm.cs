@@ -36,7 +36,8 @@ namespace T22Hub
 
         private void Client_GameStarted(object sender, EventArgs e)
         {
-            controller.AllowSending = true;
+            //controller.AllowSending = true;
+            testlabel.Text = "mooomooomooo";
         }
 
         private void Client_GameStopped(object sender, EventArgs e)
@@ -59,7 +60,7 @@ namespace T22Hub
                 string groupNumber = nudGroupNumber.Value.ToString();
                 string ip = txtIPAdress.Text;
 
-                Client.Client.Connect(groupNumber, ip, 5000);
+                Client.Client.Connect("pc6", ip, 5000);
             }
             else MessageBox.Show("Vul een ip-adres in");
         }
@@ -92,20 +93,21 @@ namespace T22Hub
                     MessageBox.Show(ex.Message);
                 }
             }
+            else MessageBox.Show("already active");
         }
 
         private void Controller_HitSomeone(object sender, EventArgs e)
         {
-            Client.Client.Punt();
-            timesHitSomeone++;
-            updateLabels();
+            //Client.Client.Punt();
+            //timesHitSomeone++;
+            //updateLabels();
         }
 
         private void Controller_GotHit(object sender, EventArgs e)
         {
-            Client.Client.Hit();
-            timesGotHit++;
-            updateLabels();
+            //Client.Client.Hit();
+            //timesGotHit++;
+            //updateLabels();
         }
 
         private void btnOverrideStart_Click(object sender, EventArgs e)
@@ -127,8 +129,8 @@ namespace T22Hub
 
         private void updateLabels()
         {
-            lblTimesGotHit.Text = timesGotHit.ToString();
-            lblTimesHitSomeone.Text = timesHitSomeone.ToString();
+            //lblTimesGotHit.Text = timesGotHit.ToString();
+            //lblTimesHitSomeone.Text = timesHitSomeone.ToString();
         }
     }
 }
