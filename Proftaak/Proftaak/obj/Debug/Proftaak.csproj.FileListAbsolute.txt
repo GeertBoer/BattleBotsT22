@@ -43,3 +43,13 @@ C:\Users\geert\Source\Repos\BattleBotsT22\Proftaak\Proftaak\obj\Debug\Proftaak.c
 C:\Users\geert\Source\Repos\BattleBotsT22\Proftaak\Proftaak\obj\Debug\Proftaak.Proftaak_Form.resources
 C:\Users\geert\Source\Repos\BattleBotsT22\Proftaak\Proftaak\obj\Debug\Proftaak.Properties.Resources.resources
 C:\Users\geert\Source\Repos\BattleBotsT22\Proftaak\Proftaak\obj\Debug\Proftaak.csproj.GenerateResource.Cache
+C:\Users\marij\Documents\GitHub\BattleBotsT22\Proftaak\Proftaak\bin\Debug\Proftaak.exe.config
+C:\Users\marij\Documents\GitHub\BattleBotsT22\Proftaak\Proftaak\bin\Debug\Proftaak.exe
+C:\Users\marij\Documents\GitHub\BattleBotsT22\Proftaak\Proftaak\bin\Debug\Proftaak.pdb
+C:\Users\marij\Documents\GitHub\BattleBotsT22\Proftaak\Proftaak\bin\Debug\Microsoft.Xna.Framework.xml
+C:\Users\marij\Documents\GitHub\BattleBotsT22\Proftaak\Proftaak\obj\Debug\Proftaak.csprojResolveAssemblyReference.cache
+C:\Users\marij\Documents\GitHub\BattleBotsT22\Proftaak\Proftaak\obj\Debug\Proftaak.Proftaak_Form.resources
+C:\Users\marij\Documents\GitHub\BattleBotsT22\Proftaak\Proftaak\obj\Debug\Proftaak.Properties.Resources.resources
+C:\Users\marij\Documents\GitHub\BattleBotsT22\Proftaak\Proftaak\obj\Debug\Proftaak.csproj.GenerateResource.Cache
+C:\Users\marij\Documents\GitHub\BattleBotsT22\Proftaak\Proftaak\obj\Debug\Proftaak.exe
+C:\Users\marij\Documents\GitHub\BattleBotsT22\Proftaak\Proftaak\obj\Debug\Proftaak.pdb
