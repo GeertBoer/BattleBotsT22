@@ -135,13 +135,13 @@ namespace T22Hub
 
         private void updateLabels()
         {
-            while (true)
+          /*  while (true)
             {
                 lblTimesGotHit.Text = timesGotHit.ToString();
                 lblTimesHitSomeone.Text = timesHitSomeone.ToString();
 
                 Thread.Sleep(1500);
-            }
+            } */
         }
     }
 }

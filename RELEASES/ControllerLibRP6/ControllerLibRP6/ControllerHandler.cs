@@ -16,7 +16,7 @@ namespace ControllerLibRP6
         private SerialPort arduino;
         private static Thread sendThread;
 
-        public bool AllowSending = true;
+        public bool AllowSending = false;
 
         private bool JustHitSomeone = false;
         private bool JustGotHit = false;
