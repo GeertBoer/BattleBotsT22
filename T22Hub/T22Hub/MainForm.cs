@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Client;
 using ControllerLibRP6;
+using System.Threading;
 
 namespace T22Hub
 {
@@ -16,6 +17,8 @@ namespace T22Hub
     {
         private int AmountOfPenalties = 0;
         private ControllerHandler controller;
+
+        private Thread labelThread;
 
         private int timesHitSomeone = 0;
         private int timesGotHit = 0;
@@ -27,6 +30,9 @@ namespace T22Hub
             Client.Client.GameStopped += Client_GameStopped;
             Client.Client.GameStarted += Client_GameStarted;
             Client.Client.PenaltyReceived += Client_PenaltyReceived;
+
+            labelThread = new Thread(updateLabels);
+            labelThread.Start();
         }
 
         private void Client_PenaltyReceived(object sender, EventArgs e)
@@ -36,8 +42,7 @@ namespace T22Hub
 
         private void Client_GameStarted(object sender, EventArgs e)
         {
-            //controller.AllowSending = true;
-            testlabel.Text = "mooomooomooo";
+            controller.AllowSending = true;
         }
 
         private void Client_GameStopped(object sender, EventArgs e)
@@ -45,7 +50,6 @@ namespace T22Hub
             controller.AllowSending = false;
             timesHitSomeone = 0;
             timesGotHit = 0;
-            updateLabels();
         }
 
         private void Client_GamePaused(object sender, EventArgs e)
@@ -98,16 +102,18 @@ namespace T22Hub
 
         private void Controller_HitSomeone(object sender, EventArgs e)
         {
-            //Client.Client.Punt();
-            //timesHitSomeone++;
-            //updateLabels();
+            Client.Client.Punt();
+            timesHitSomeone++;
+
+            MessageBox.Show("HitSomeone");
         }
 
         private void Controller_GotHit(object sender, EventArgs e)
         {
-            //Client.Client.Hit();
-            //timesGotHit++;
-            //updateLabels();
+            Client.Client.Hit();
+            timesGotHit++;
+
+            MessageBox.Show("GotHit");
         }
 
         private void btnOverrideStart_Click(object sender, EventArgs e)
@@ -129,8 +135,13 @@ namespace T22Hub
 
         private void updateLabels()
         {
-            //lblTimesGotHit.Text = timesGotHit.ToString();
-            //lblTimesHitSomeone.Text = timesHitSomeone.ToString();
+            while (true)
+            {
+                lblTimesGotHit.Text = timesGotHit.ToString();
+                lblTimesHitSomeone.Text = timesHitSomeone.ToString();
+
+                Thread.Sleep(1500);
+            }
         }
     }
 }

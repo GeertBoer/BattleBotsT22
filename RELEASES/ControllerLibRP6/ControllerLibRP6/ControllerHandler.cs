@@ -7,13 +7,14 @@ using System.IO;
 using System.IO.Ports;
 using Microsoft.Xna.Framework.Input;
 using System.Threading;
+using System.Diagnostics;
 
 namespace ControllerLibRP6
 {
     public class ControllerHandler
     {
         private SerialPort arduino;
-        private Thread sendThread;
+        private static Thread sendThread;
 
         public bool AllowSending = true;
 
@@ -39,6 +40,7 @@ namespace ControllerLibRP6
             sendThread = new Thread(sendAll);
             connect(comPort);
             sendThread.Start();
+            Stopwatch watch = new Stopwatch();
         }
 
         private void connect(int comPort)
@@ -56,7 +58,7 @@ namespace ControllerLibRP6
 
         public void PauseSending()
         {
-            if (sendThread.ThreadState == ThreadState.Running)
+            if (sendThread.ThreadState == System.Threading.ThreadState.Running)
             {
                 stopRP6();
                 sendThread.Suspend();
@@ -66,7 +68,7 @@ namespace ControllerLibRP6
         private void Arduino_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             byte responseByte = Convert.ToByte(arduino.ReadByte());
-            Console.WriteLine(responseByte);
+            //Console.WriteLine(responseByte);
             if ((responseByte & 0x01) != 0)
             {
                 OnGotHit(EventArgs.Empty);
@@ -86,12 +88,14 @@ namespace ControllerLibRP6
             float ls = GamePad.GetState(Microsoft.Xna.Framework.PlayerIndex.One).ThumbSticks.Left.X;
             ButtonState btnA = GamePad.GetState(Microsoft.Xna.Framework.PlayerIndex.One).Buttons.A;
 
+            byte startByte = 37;
+            byte endByte = 35;
             byte controlByte = makeControlByte(lt, rt, btnA);
             byte[] speedByte = makeSpeedBytes(lt, rt, ls);
 
-            byte[] toSend = { controlByte, speedByte[0], speedByte[1] };
+            byte[] toSend = { startByte, controlByte, speedByte[0], speedByte[1], endByte };
 
-            sendThreeBytes(toSend);
+            sendFiveBytes(toSend);
         }
 
         private byte makeControlByte(float lt, float rt, ButtonState mustHit)
@@ -119,15 +123,16 @@ namespace ControllerLibRP6
                 toReturn |= 0x20;
                 JustGotHit = false;
             }
-
-            return toReturn;
+            
+            return toReturn;                
         }
 
-        private void sendThreeBytes(byte[] toSend)
+        private void sendFiveBytes(byte[] toSend)
         {
             if (AllowSending == true)
             {
-                arduino.Write(toSend, 0, 3);
+                Console.WriteLine(toSend[0].ToString() + " , " + toSend[1].ToString() + " , " + toSend[2].ToString() + " , " + toSend[3].ToString() + " , " + toSend[4].ToString());
+                arduino.Write(toSend, 0, 5);
             }
         }
 
@@ -143,7 +148,7 @@ namespace ControllerLibRP6
         private void stopRP6()
         {
             byte[] nullArray = { 0, 0, 0 };
-            sendThreeBytes(nullArray);
+            sendFiveBytes(nullArray);
         }
 
         private byte[] makeSpeedBytes(float forwardSpeed, float backwardSpeed, float direction)
@@ -178,8 +183,18 @@ namespace ControllerLibRP6
                 leftMotorSpeed = speed - toSubtract;
             }
 
-            byte leftMotorByte = Convert.ToByte(leftMotorSpeed * 255);
-            byte rightMotorByte = Convert.ToByte(rightMotorSpeed * 255);
+            byte leftMotorByte = Convert.ToByte(leftMotorSpeed * 220);
+            byte rightMotorByte = Convert.ToByte(rightMotorSpeed * 220);
+
+            if (leftMotorByte == 35 || leftMotorByte == 37)
+            {
+                leftMotorByte = 36;
+            }
+
+            if (rightMotorByte == 35 || rightMotorByte == 37)
+            {
+                rightMotorByte = 36;
+            }
 
             byte[] toReturn = { leftMotorByte, rightMotorByte };
 
@@ -188,12 +203,12 @@ namespace ControllerLibRP6
 
         private void stopSending()
         { 
-            if (sendThread.ThreadState == ThreadState.Suspended)
+            if (sendThread.ThreadState == System.Threading.ThreadState.Suspended)
             {
                 sendThread.Resume();
                 sendThread.Abort();
             } 
-            if ((sendThread.ThreadState != ThreadState.Aborted) || (sendThread.ThreadState != ThreadState.Unstarted))
+            if ((sendThread.ThreadState != System.Threading.ThreadState.Aborted) || (sendThread.ThreadState != System.Threading.ThreadState.Unstarted))
             {
                 sendThread.Abort();
             }
